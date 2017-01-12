@@ -1,0 +1,36 @@
+include "global.tbh"
+
+'Specify the IC range in Ohms (i.e. 10000 for 10K IC).
+'You can set the range to the ACTUAL value measured on your Tibbit's pins 2 and 4 (pins 1 and 3 on the adjacent terminal block Tibbit).
+'This will allow for a more precise impedance programming.
+Const FULL_SCALE=46000 '<<========================================== CHANGE AS NEEDED
+
+'Run this program in debug mode while measuring the impedance between Tibbit pins 3 and 4 (pins 2 and 3 on the adjacent terminal block Tibbit). 
+
+
+'====================================================================
+sub on_sys_init()
+	select case tbt40_init(YES)
+	case TBT40_SELFTEST_FAILED:
+		sys.halt
+		sys.debugprint("Tibbit not found or malfunctioning"+CR_LF)
+
+	case TBT40_NO_SSI_AVAILABLE:
+		sys.debugprint("SSI channel could not be allocated, using bit banging instead."+CR_LF)
+
+	end select
+
+	'Use F10 to step over the procedures below.
+	
+	'This sets the IC to the maximum impedance it can produce. Use a meter to measure the actual impedance. It will be quite different from the nominal value.
+	'Our IC sample gave us the value of 9080 Ohm for the 10KOhm IC.
+	tbt40_set(256,NO)
+	
+	'This sets the impedance to (close to) 5KOhm and saves the impendance into the ICs EEPROM	
+	tbt40_set_ohm(FULL_SCALE/2,FULL_SCALE,YES)
+	
+	'This sets the impedance to (close to) 7KOhm without saving the new value into the EEPROM
+	tbt40_set_ohm(FULL_SCALE/3,FULL_SCALE,NO)
+	
+	'Power cycle your system. The first value (5KOhm) will be recalled because it was stored into the EEPROM while the second value (7KOhm) wasn't.
+end sub
