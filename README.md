@@ -29,10 +29,3 @@ Stopping at the third breakpoint will set the impedance to 1/3 of the max value.
 ![](READMEImages/I2C_tibbit-40-1.jpg)
 
 ##### Measuring the impedance for Tibbit #40
-
-```
-
-```
-
-
-
