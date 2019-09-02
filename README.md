@@ -1,4 +1,4 @@
-# CA-Test-Tibbit-40
+# Test Application for Digital Potentiometer Tibbits (#40-x)
 
 You will need:
 
@@ -28,4 +28,4 @@ Stopping at the third breakpoint will set the impedance to 1/3 of the max value.
 
 ![](READMEImages/I2C_tibbit-40-1.jpg)
 
-##### Measuring the impedance for Tibbit #40
+#### Measuring the impedance for Tibbit #40
