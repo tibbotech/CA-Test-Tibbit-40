@@ -53,7 +53,7 @@ function tbt40_init(use_ssi as no_yes) as tbt40_errcheck
 	if i2c_num_tbt40 <4 then
 		ssi.channel=i2c_num_tbt40
 		ssi.enabled=NO
-		ssi.baudrate=1
+		ssi.baudrate=PL_SSI_BAUDRATES_100kHz
 		ssi.clkmap=TBT40_CLK_PIN
 		ssi.dimap=TBT40_DATA_PIN
 		ssi.domap=TBT40_DATA_PIN
